@@ -1,0 +1,5 @@
+const emailScript = () => {
+  
+}
+
+export { emailScript };
