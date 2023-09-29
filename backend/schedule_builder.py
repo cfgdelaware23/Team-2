@@ -10,14 +10,14 @@ events = {"event1":
           [
               {"skill1"},
               "Monday",
-              [2,3],
+              [3,4],
               1
           ]}
 
 # Match skill set and list of hours
 def list_of_volunteers_for_event(event):
     selected_volunteers = []
-    all_volunteers = volunteers.keys()
+    all_volunteers = list(volunteers.keys())
 
     # Check if the event is in the set of events
     if event in events:
@@ -25,11 +25,17 @@ def list_of_volunteers_for_event(event):
         num_volunteers = event_info[3]
         skills_needed = event_info[0]
         hours_needed = event_info[2]
+        day = event_info[1]
         # Repeat for number of volunteers needed
-        while num_volunteers:
-            for volunteer in volunteers:
-                if 
-            
+        while num_volunteers and all_volunteers:
+            volunteer = all_volunteers.pop()
+            # Isolate the array of available hours for that volunteer for the day
+            available_hours = volunteers[volunteer][1][day]
+            # Check the volunteer is available
+            if(set(hours_needed).issubset(set(available_hours))):
+                print("Available!")
+            else:
+                print("Not available!")
 
 '''
 Pseudocode:
@@ -59,3 +65,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+'''
+# Big dictionary
+
+{
+key=event_name 
+value=[volunteers]
+}
+
+{
+"event1":["Anna","Jason"],
+"event2":["person3","person4"]
+}
+'''
