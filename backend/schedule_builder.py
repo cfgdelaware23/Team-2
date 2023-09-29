@@ -6,20 +6,35 @@ volunteers = {"Anna":
                 ]}
 
 # in the format key=event, value=[{set of skills}, day-of-week, [list of hours in 24-hour format], # of volunteers]
-events = dict()
+events = {"event1":
+          [
+              {"skill1"},
+              "Monday",
+              [2,3],
+              1
+          ]}
 
 # Match skill set and list of hours
 def list_of_volunteers_for_event(event):
+    selected_volunteers = []
+    all_volunteers = volunteers.keys()
+
     # Check if the event is in the set of events
     if event in events:
-        num_volunteers = events[2]
+        event_info = events[event]
+        num_volunteers = event_info[3]
+        skills_needed = event_info[0]
+        hours_needed = event_info[2]
         # Repeat for number of volunteers needed
-        for i in len(num_volunteers):
-            skills_needed = events[0]
-            hours_needed = events[1]
+        while num_volunteers:
+            for volunteer in volunteers:
+                if 
+            
 
 '''
 Pseudocode:
+goal: return a list of volunteers for the event and remove those hours for the volunteers
+
 list of all volunteers, pop() when checking a volunteer
 remove facilitators of the event from the list (they can't be volunteers)
 volunteer is a match if:
@@ -28,6 +43,7 @@ volunteer is a match if:
         - skills_needed is a subset of skills of the volunteer
 when a volunteer match is found:
 - remove taken hours
+- add volunteer to list
 
 '''
 '''
@@ -39,8 +55,7 @@ def remove_hours_from_volunteer(name, day, hours):
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
 def main():
-    remove_hours_from_volunteer("Anna", "Monday", [2,3])
-    print(volunteers)
+    list_of_volunteers_for_event("event1")
 
 if __name__ == "__main__":
     main()
