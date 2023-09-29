@@ -1,5 +1,9 @@
 # in the format key=name, value=[{set of skills}, {key=day-of-week, value=[set of available hours in 24-hour format]]
-availabilities = dict()
+volunteers = {"Anna": 
+                [
+                    {"skill1"},
+                    {"Monday": [1,2,3,4]}
+                ]}
 
 # in the format key=event, value=[{set of skills}, day-of-week, [list of hours in 24-hour format], # of volunteers]
 events = dict()
@@ -23,13 +27,20 @@ volunteer is a match if:
         - hours_needed of the event is a subset of available_hours of the volunteer
         - skills_needed is a subset of skills of the volunteer
 when a volunteer match is found:
-- add that volunteer to a list of volunteers for the event
+- remove taken hours
 
 '''
-
+'''
+function to remove taken hours
+'''
+# name is data type string, day is type string, hours is a list of ints
+def remove_hours_from_volunteer(name, day, hours):
+    if name in volunteers:
+        volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
 def main():
-    pass
+    remove_hours_from_volunteer("Anna", "Monday", [2,3])
+    print(volunteers)
 
 if __name__ == "__main__":
     main()
