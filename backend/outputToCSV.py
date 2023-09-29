@@ -1,16 +1,19 @@
-def convert_to_csv(str):
-    parts = s.split('-')
-    
+def convert_to_csv(event_info):
     cleaned_parts = []
-    for part in parts:
-        cleaned = part.strip()
-        if cleaned:  
+       
+    for item in event_info:
+        cleaned = item.strip()  
+               
+        if cleaned:
             cleaned_parts.append(cleaned)
     
+    csv_string = ','.join(cleaned_parts)
+    
+    return csv_string
 
-    return ','.join(cleaned_parts)
+event_info_list = [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
+csv_output = convert_to_csv(event_info_list)
+print(csv_output)
 
-input_string = "- Day - Time - Title - Account - Host - Moderator - Facilitator - Streamer - Broadcaster"
-csv_string = convert_to_csv(input_string)
-print(csv_string)
+
 
