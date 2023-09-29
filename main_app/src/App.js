@@ -1,22 +1,18 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [file, setFile] = useState(null);
+
+  const handleDrop = (e) => {
+    const droppedFile = e.dataTransfer.files[0];
+    setFile(droppedFile);
+  };
+
   return (
-    <div className="App">
+    <div className="App" onDrop={handleDrop}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {file ? <p>File dropped: {file.name}</p> : <p>Drag and drop an Excel file here</p>}
       </header>
     </div>
   );
