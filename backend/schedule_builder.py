@@ -1,3 +1,4 @@
+'''
 # in the format key=name, value=[{set of skills}, {key=day-of-week, value=[set of available hours in 24-hour format]]
 volunteers = {"Anna": 
                 [
@@ -34,8 +35,9 @@ events = {"event1":
               [6,7],
               2
           ]}
+'''
 
-def build_schedule(events):
+def build_schedule(events, volunteers):
     #hold the transformed output
     result = []
 
@@ -44,7 +46,7 @@ def build_schedule(events):
         day = event_info[1]
         time_range = "-".join(map(str, event_info[2]))
         
-        volunteers_for_event = list_of_volunteers_for_event(event)
+        volunteers_for_event = list_of_volunteers_for_event(event, events, volunteers)
 
         # filling in data
         row = [day, time_range, event, "dummy acc", "dummy host", "dummy mod"]
@@ -63,7 +65,7 @@ def build_schedule(events):
 
 
 # Match skill set and list of hours
-def list_of_volunteers_for_event(event):
+def list_of_volunteers_for_event(event, events, volunteers):
     selected_volunteers = []
     all_volunteers = list(volunteers.keys())
 
@@ -87,7 +89,7 @@ def list_of_volunteers_for_event(event):
                 and skills_needed.issubset(skills)):
                 print(f"Matched {volunteer} to event {event}")
                 selected_volunteers.append(volunteer)
-                remove_hours_from_volunteer(volunteer, day, hours_needed)
+                remove_hours_from_volunteer(volunteer, day, hours_needed, volunteers)
                 # Decrement counter
                 num_volunteers -= 1
             # Volunteer is not a good match
@@ -114,7 +116,7 @@ when a volunteer match is found:
 function to remove taken hours
 '''
 # name is data type string, day is type string, hours is a list of ints
-def remove_hours_from_volunteer(name, day, hours):
+def remove_hours_from_volunteer(name, day, hours, volunteers):
     if name in volunteers:
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
