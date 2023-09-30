@@ -8,7 +8,14 @@ volunteers = {"Anna":
                 "Jason":
                 [
                     {"skill1"},
-                    {"Monday":[3,4]}
+                    {"Monday":[3,4],
+                     "Tuesday":[]}
+                ],
+                "Debanjan":
+                [
+                    {"skill2", "skill4"},
+                    {"Monday":[4,5,6,7],
+                     "Tuesday":[6,7]}
                 ]
                 }
 
@@ -19,12 +26,19 @@ events = {"event1":
               "Monday",
               [3,4],
               2
+          ],
+          "event2":
+          [
+              {"skill2"},
+              "Tuesday",
+              [6,7],
+              2
           ]}
 
 def build_schedule(events):
-    schedule = []
+    schedule = {}
     for event in events:
-        schedule.append([event, list_of_volunteers_for_event(event)])
+        schedule[event] = list_of_volunteers_for_event(event)
     return schedule
 
 # Match skill set and list of hours

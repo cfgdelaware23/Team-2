@@ -1,0 +1,37 @@
+# in the format key=name, value=[{set of skills}, {key=day-of-week, value=[set of available hours in 24-hour format]]
+volunteers = [
+                { "Anna": 
+                    {
+                        "Skills": ["skill1", "skill2"],       # set of skills
+                        "Monday": [1,2,3,4],
+                        "Tuesday": [2,3,6,7]
+                    },
+                },
+                { "Shashank": 
+                    {
+                        "Skills": ["skill1", "skill2"],       # set of skills
+                        "Monday": [1,2,3,4],
+                        "Tuesday": [2,3,6,7]
+                    }
+                }
+            ]
+
+# in the format key=event, value=[{set of skills}, day-of-week, [list of hours in 24-hour format], # of volunteers]
+events = [
+            {"event1":
+                {
+                    "Skills": ["skill1"],
+                    "Day": "Monday",
+                    "Hours": [3, 4],
+                    "Num_Volunteers": 1
+                }
+            },
+            {"event2":
+                {
+                    "Skills": ["skill1"],
+                    "Day": "Monday",
+                    "Hours": [3, 4],
+                    "Num_Volunteers": 1
+                }
+            }
+        ]
