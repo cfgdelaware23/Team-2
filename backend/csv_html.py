@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import csv
+from json import dumps
 # sample csv file, will be replaced with the CSV file sent through
 csv_file = "/Users/leem/Downloads/9.17-9.23-Hosting-final.csv"
 
@@ -16,13 +17,15 @@ def read_csv(csv_file):
     # NEEDS TO BE TAKEN OUT LATER
     for i in range(len(dataList)):
         print(dataList[i])
-    return dataList
+        
+    json_result = dumps(dataList)
+    return json_result
 
 @app.route('/')
 def display_csv():
     ## sends the intended csv into the index.html file
-    formatted_data = read_csv(csv_file)
-    return render_template("index.html", csv_data=formatted_data)
+    json_result = read_csv(csv_file)
+    return render_template("index.html", csv_data=json_result)
 
 if __name__ == '__main__':
     app.run(debug=True)
