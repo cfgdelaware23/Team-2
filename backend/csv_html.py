@@ -4,7 +4,6 @@ import csv
 from datetime import datetime
 import pandas
 # sample csv file, will be replaced with the CSV file sent through
-# csv_file = "/Users/leem/Downloads/Copy of Recurring events 2023.xlsx"
 
 app = Flask(__name__)
 
@@ -16,7 +15,7 @@ def getCurrentWeekDay():
     return listWeek[weekDay]
 
 def excelToCsv():
-    # converts an excel file into csv
+    # converts an excel file into csv, expecting an input file
     excelFile = "/Users/leem/Downloads/Copy of Recurring events 2023.xlsx"
 
     read_file = pandas.read_excel(excelFile)
