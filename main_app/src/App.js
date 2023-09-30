@@ -41,9 +41,14 @@ function App() {
           (firstFile && secondFile) ? 
           <p>Files selected: {firstFile.name} and {secondFile.name}</p> : 
           <>
-            <label htmlFor="fileInput">
-              Use the Browse button to select an Excel file from your device:
-              <input type="file" id="fileInput" onChange={handleDrop} aria-describedby="fileInput" />
+            <p>Use the Browse button to select the Excel files from your device</p>
+            <label htmlFor="firstFileInput">
+              Select Schedule File:
+              <input type="file" id="firstFileInput" onChange={handleDrop("first")} aria-describedby="fileInput" />
+            </label>
+            <label htmlFor="secondFileInput">
+              Select Final Schedule File:
+              <input type="file" id="secondFileInput" onChange={handleDrop("second")} aria-describedby="fileInput" />
             </label>
           </>
         }
