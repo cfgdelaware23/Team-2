@@ -3,7 +3,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
     return (
       {
         "name": d.Name,
-        "skills": d.Roles?.split(", "),
+        "skills": d.Roles?.split(", ") ?? ['Host'],
         "monday": convertTimes(d.Monday),
         "tuesday": convertTimes(d.Tuesday),
         "wednesday": convertTimes(d.Wednesday),
@@ -19,8 +19,8 @@ function apiLayer(volunteerAvailability, eventSchedule) {
       {
         "eventName": e.Event,
         "day": e.Day,
-        "meetingID": e["Meeting ID"],
-        "organizer": e.Organizer,
+        "meetingID": e["Meeting ID"] ?? "Not Available",
+        "organizer": e.Organizer ?? "Not Available",
         "account": e.Account,
         "recurrence": e.Recurring,
         "time": [parseInt(parseFloat(e.Time) * 24)]
@@ -31,6 +31,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
     "volunteerData": formattedVolunteerData,
     "eventData": formattedEventData
   }
+  console.log(json);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -38,7 +39,17 @@ function apiLayer(volunteerAvailability, eventSchedule) {
   };
   fetch("/getSchedule", requestOptions).then((res) =>
       res.json().then((d) => {
-          console.log(d);
+          const blob = new Blob([d.schedule], { type: 'text/csv' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = "filename";
+        
+          document.body.appendChild(a);
+          a.click();
+        
+          window.URL.revokeObjectURL(url);
       })
   );
 }

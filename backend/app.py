@@ -12,7 +12,7 @@ events = {}
 @app.route("/getSchedule", methods=['POST'])
 def hello_world():
     content = request.json
-    print(content)
+    # print(content)
     # next step - call Anna's function
     # Extract each key-value pair for volunteer and format it for 
     # build_schedule function
@@ -31,7 +31,7 @@ def hello_world():
         volunteers[name] = [skills, availability]
 
     for event in content["eventData"]:
-        skill = set(None)
+        # skill = set(None)
         name = event['eventName']
         day = event['day']
         meetingID = event['meetingID']
@@ -41,12 +41,17 @@ def hello_world():
         time = event['time']
         num_volunteers = None
 
-        events[name] = [skill, day, time, num_volunteers, organizer, meetingID, 
+        events[name] = [None, day, time, num_volunteers, organizer, meetingID, 
                         account, recurrence]
     
     # call build_schedule
     schedule_list = build_schedule(events, volunteers)
-    schedule_cvs = convert_to_csv(schedule_list)
+    schedule_csv = convert_to_csv(schedule_list)
+
+    # print(schedule_csv)
+    return {
+        "schedule": schedule_csv
+    }
     
 
 @app.route('/get-events', methods = ['GET'])

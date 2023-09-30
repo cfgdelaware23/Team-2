@@ -57,21 +57,6 @@ function App() {
     synth.speak(sound);
   }
 
-  function downloadCSV(csv, filename) {
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = url;
-    a.download = filename;
-  
-    document.body.appendChild(a);
-    a.click();
-  
-    window.URL.revokeObjectURL(url);
-  }
-  
-
   //"Label" semantic HTML tag
   //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
   return (

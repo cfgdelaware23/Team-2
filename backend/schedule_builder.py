@@ -55,6 +55,7 @@ def build_schedule(events, volunteers):
         time_range = "-".join(map(str, event_info[2]))
         
         volunteers_for_event = list_of_volunteers_for_event(event, events, volunteers)
+        print(volunteers_for_event)
 
         # filling in data
         row = [day, time_range, event, event_info[6], event_info[4]]
@@ -94,6 +95,8 @@ def list_of_volunteers_for_event(event, events, volunteers):
             available_hours = volunteers[volunteer][1][day]
             # Isolate the list of skills the volunteer has
             skills = volunteers[volunteer][0]
+            print(hours_needed)
+            print(available_hours)
             # Check the volunteer is available and has matching skills
             if ((set(hours_needed).issubset(set(available_hours))) 
                 and skills_needed.issubset(skills)):

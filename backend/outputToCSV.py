@@ -3,19 +3,22 @@ def convert_to_csv(event_info):
     cleaned_parts = []
        
     # iterate thu given array of strings
-    for item in event_info:
-        # remove frront and back whitespaces from the string
-        cleaned = item.strip()  
-               
-        # replace any comma in the string with an underscore, one push to main
-        cleaned = cleaned.replace(',', '_')
-               
-        #if not empty add cleaned string
-        if cleaned:
-            cleaned_parts.append(cleaned)
+    for event in event_info:
+        row = []
+        for item in event:
+            # remove frront and back whitespaces from the string
+            cleaned = item.strip()  
+                
+            # replace any comma in the string with an underscore, one push to main
+            cleaned = cleaned.replace(',', '_')
+                
+            #if not empty add cleaned string
+            if cleaned:
+                row.append(cleaned)
+        cleaned_parts.append(','.join(row))
     
-    # Join the cleaned strings using a comma to form the CSV string
-    csv_string = ','.join(cleaned_parts)
+    # Join the cleaned rows using newline
+    csv_string = '\n'.join(cleaned_parts)
     
     # returning the final CSV string
     return csv_string
