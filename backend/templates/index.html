@@ -9,23 +9,24 @@
     {% for entry in csv_data %}
     <div class="event">
         <p>
-            <strong>Date:</strong> {{ entry['Date'] }}
+            <strong>Day:</strong> {{ entry['Day'] }}
         </p>
         <p>
             <strong>Time:</strong> {{ entry['Time'] }}
         </p>
         <p>
-            <strong>Event:</strong> {{ entry['Event'] }}
+            <strong>Location:</strong> {{ entry['Location'] }}
         </p>
         <p>
-            <strong>Account:</strong> {{ entry['Account'] }}
+            <strong>Title:</strong> {{ entry['Title'] }}
         </p>
         <p>
-            <strong>Recurring:</strong> {{ entry['Recurring'] }}
+            <strong>Host:</strong> {{ entry['Host'] }}
         </p>
         <p>
-            <strong>Meeting ID:</strong> {{ entry['Meeting ID'] }}
+            <strong> Volunteers:</strong> {{ entry['Volunteers'] }}
         </p>
+        {#
         <p>
             <strong>Organizer:</strong> {{ entry['Organizer'] }}
         </p>
@@ -66,6 +67,7 @@
         <p>
             <strong>Passcode:</strong> {{ entry['Passcode'] }}
         </p>
+        #}
     </div>
     {% endfor %}
 </body>
