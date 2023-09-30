@@ -4,22 +4,31 @@ import apiLayer from './api';
 import * as xlsx from 'xlsx';
 
 function App() {
-  const [file, setFile] = useState(null);
+  const [firstFile, setFirstFile] = useState(null);
+  const [secondFile, setSecondFile] = useState(null);
 
-  const handleDrop = (e) => {
+  const handleDrop = (type) => (e) => {
     e.preventDefault();
     const droppedFile = e.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-        const data = e.target.result;
-        const workbook = xlsx.read(data, { type: "array" });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet);
-        apiLayer(json);
+      const data = e.target.result;
+      const workbook = xlsx.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const json = xlsx.utils.sheet_to_json(worksheet);
+
+      if (type === "first")
+          setFirstFile(json);
+      else 
+          setSecondFile(json);
+
+      if (firstFile && type === "second")
+          apiLayer(firstFile, json);
+      else if (secondFile && type === "first")
+          apiLayer(json, secondFile);
     };
     reader.readAsArrayBuffer(e.dataTransfer.files[0]);
-    setFile(droppedFile);
     //apiLayer(file);
   };
 
@@ -29,11 +38,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         {
-          file ? <p>File dropped: {file.name}</p> : 
+          (firstFile && secondFile) ? 
+          <p>Files selected: {firstFile.name} and {secondFile.name}</p> : 
           <>
-            <label htmlFor="fileInput">
-              Use the Browse button to select an Excel file from your device:
-              <input type="file" id="fileInput" onChange={handleDrop} aria-describedby="fileInput" />
+            <p>Use the Browse button to select the Excel files from your device</p>
+            <label htmlFor="firstFileInput">
+              Select Schedule File:
+              <input type="file" id="firstFileInput" onChange={handleDrop("first")} aria-describedby="fileInput" />
+            </label>
+            <label htmlFor="secondFileInput">
+              Select Final Schedule File:
+              <input type="file" id="secondFileInput" onChange={handleDrop("second")} aria-describedby="fileInput" />
             </label>
           </>
         }
