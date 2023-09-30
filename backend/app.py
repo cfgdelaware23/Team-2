@@ -45,6 +45,7 @@ def hello_world():
     schedule_list = build_schedule(events, volunteers)
     schedule_csv = convert_to_csv(schedule_list)
 
+    # Return the final schedule
     return {
         "schedule": schedule_csv
     }
