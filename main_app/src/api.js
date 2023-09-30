@@ -18,12 +18,13 @@ function apiLayer(volunteerAvailability, eventSchedule) {
     return (
       {
         "eventName": e.Event,
+        "skillsNeeded": e["Skills Needed"]?.split(", ") ?? ["Host"],
         "day": e.Day,
         "meetingID": e["Meeting ID"] ?? "Not Available",
         "organizer": e.Organizer ?? "Not Available",
         "account": e.Account,
         "recurrence": e.Recurring,
-        "time": [parseInt(parseFloat(e.Time) * 24)]
+        "time": [parseInt((parseFloat(e.Time)-1) * 24)]
       }
     );
   })

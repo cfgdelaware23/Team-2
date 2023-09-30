@@ -1,11 +1,16 @@
 def convert_to_csv(event_info):
     # return array
     cleaned_parts = []
-       
+    headers = ["Day", "Time", "Location", "Title", "Host", "Volunteers"]
+    cleaned_parts.append(','.join(headers))
     # iterate thu given array of strings
     for event in event_info:
         row = []
         for item in event:
+            if type(item) is list:
+                row.append('_'.join(item))
+                continue
+
             # remove frront and back whitespaces from the string
             cleaned = item.strip()  
                 

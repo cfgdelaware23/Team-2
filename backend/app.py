@@ -20,18 +20,18 @@ def hello_world():
         name = volunteer['name']
         skills = set(volunteer['skills'])
         availability = {}
-        availability['monday'] = volunteer['monday']
-        availability['tuesday'] = volunteer['tuesday']
-        availability['wednesday'] = volunteer['wednesday']
-        availability['thursday'] = volunteer['thursday']
-        availability['friday'] = volunteer['friday']
-        availability['saturday'] = volunteer['saturday']
-        availability['sunday'] = volunteer['sunday']
+        availability['Monday'] = volunteer['monday']
+        availability['Tuesday'] = volunteer['tuesday']
+        availability['Wednesday'] = volunteer['wednesday']
+        availability['Thursday'] = volunteer['thursday']
+        availability['Friday'] = volunteer['friday']
+        availability['Saturday'] = volunteer['saturday']
+        availability['Sunday'] = volunteer['sunday']
         
         volunteers[name] = [skills, availability]
 
     for event in content["eventData"]:
-        # skill = set(None)
+        skill = set(event["skillsNeeded"])
         name = event['eventName']
         day = event['day']
         meetingID = event['meetingID']
@@ -39,9 +39,9 @@ def hello_world():
         account = event['account']
         recurrence = event['recurrence']
         time = event['time']
-        num_volunteers = None
+        num_volunteers = 2
 
-        events[name] = [None, day, time, num_volunteers, organizer, meetingID, 
+        events[name] = [skill, day, time, num_volunteers, organizer, meetingID, 
                         account, recurrence]
     
     # call build_schedule

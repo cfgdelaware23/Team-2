@@ -48,17 +48,16 @@ events = {"event1":
 def build_schedule(events, volunteers):
     #hold the transformed output
     result = []
-
     for event in events:
         event_info = events[event]
         day = event_info[1]
         time_range = "-".join(map(str, event_info[2]))
         
         volunteers_for_event = list_of_volunteers_for_event(event, events, volunteers)
-        print(volunteers_for_event)
+        # print(volunteers_for_event)
 
         # filling in data
-        row = [day, time_range, event, event_info[6], event_info[4]]
+        row = [day, time_range, event, event_info[6], event_info[4], volunteers_for_event]
 
         '''
         # adding facilitator and streamer (or placeholders if not available)
@@ -95,12 +94,12 @@ def list_of_volunteers_for_event(event, events, volunteers):
             available_hours = volunteers[volunteer][1][day]
             # Isolate the list of skills the volunteer has
             skills = volunteers[volunteer][0]
-            print(hours_needed)
-            print(available_hours)
+            # print(hours_needed)
+            # print(available_hours)
             # Check the volunteer is available and has matching skills
             if ((set(hours_needed).issubset(set(available_hours))) 
                 and skills_needed.issubset(skills)):
-                print(f"Matched {volunteer} to event {event}")
+                # print(f"Matched {volunteer} to event {event}")
                 selected_volunteers.append(volunteer)
                 remove_hours_from_volunteer(volunteer, day, hours_needed, volunteers)
                 # Decrement counter
