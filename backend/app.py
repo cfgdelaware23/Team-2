@@ -12,12 +12,9 @@ def hello_world():
     content = request.json
     print(content)
     # next step - call Anna's function
-    # Extract and print each key-value pair
+    return content
 
-    for key, value in content.items():
-        # Adding to volunteers dictionary
-        print(f"Key: {key}")
-        print(f"Value: {value}")
-        skills = {}
-        availability = {}
-        volunteers[key] = []
+@app.route('/get-events', methods = ['GET'])
+def getSelectedEvents():
+    filteredArray = read_csv()
+    return jsonify(filteredArray)
