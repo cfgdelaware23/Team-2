@@ -5,6 +5,11 @@ volunteers = {"Anna":
                     {"Monday": [1,2,3,4],
                      "Tuesday": [2,3,6,7]}
                 ],
+                "Jason":
+                [
+                    {"skill1"},
+                    {"Monday":[3,4]}
+                ]
                 }
 
 # in the format key=event, value=[{set of skills}, day-of-week, [list of hours in 24-hour format], # of volunteers]
@@ -13,8 +18,14 @@ events = {"event1":
               {"skill1"},
               "Monday",
               [3,4],
-              1
+              2
           ]}
+
+def build_schedule(events):
+    schedule = []
+    for event in events:
+        schedule.append([event, list_of_volunteers_for_event(event)])
+    return schedule
 
 # Match skill set and list of hours
 def list_of_volunteers_for_event(event):
@@ -73,10 +84,8 @@ def remove_hours_from_volunteer(name, day, hours):
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
 def main():
-    print(volunteers)
-    selected_volunteers = list_of_volunteers_for_event("event1")
-    print(volunteers)
-    print(selected_volunteers)
+    print(build_schedule(events))
+    
 
 if __name__ == "__main__":
     main()
