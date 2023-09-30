@@ -26,7 +26,7 @@ def excelToCsv():
     return csv_file
     
 def read_csv():
-    csv_file = excelToCsv()
+    csv_file = "/Users/leem/Downloads/filename_14.csv"
     eventsArray = []
     currentWeekday = getCurrentWeekDay()
 
@@ -37,26 +37,14 @@ def read_csv():
             day = row[0].strip().lower()
             # events are added to a dictionary, that is then appended to a list
             if day == currentWeekday:
+                # Day,Time,Location,Title,Host,Volunteers
                 event = {
-                    'Date': row[0].strip(),
+                    'Day': row[0].strip(),
                     'Time': row[1].strip(),
-                    'Event': row[2].strip(),
-                    'Account': row[3].strip(),
-                    'Recurring': row[4].strip(),
-                    'Meeting ID': row[5].strip(),
-                    'Organizer': row[6].strip(),
-                    'Email': row[7].strip(),
-                    'Description': row[8].strip(),
-                    'ACB Media Description': row[9].strip(),
-                    'ACB Media Link': row[10].strip(),
-                    'Amazon Call Description': row[11].strip(), 
-                    'Clubhouse Description': row[12].strip(),
-                    'Clubhouse Link': row[13].strip(),
-                    'Zoom Title': row[14].strip(),
-                    'Zoom Link': row[15].strip(),
-                    'One tap mobile': row[16].strip(),
-                    'Phone': row[17].strip(),
-                    'Passcode': row[18].strip()
+                    'Location': row[2].strip(),
+                    'Title': row[3].strip(),
+                    'Host': row[4].strip(),
+                    'Volunteers': row[5].strip()
                 }
                 eventsArray.append(event)
     # debugging for the index 
@@ -91,25 +79,31 @@ def compare(file1, file2):
                 # compares if they both have the same title and occur on  the same day
                 if elem[2].strip().lower() == cellTitle and day == currentWeekday:
                     event = {
-                        'Date': row[0].strip(),
+                        'Day': row[0].strip(),
                         'Time': row[1].strip(),
-                        'Event': row[2].strip(),
-                        'Account': row[3].strip(),
-                        'Recurring': row[4].strip(),
-                        'Meeting ID': row[5].strip(),
-                        'Organizer': row[6].strip(),
-                        'Email': row[7].strip(),
-                        'Description': row[8].strip(),
-                        'ACB Media Description': row[9].strip(),
-                        'ACB Media Link': row[10].strip(),
-                        'Amazon Call Description': row[11].strip(), 
-                        'Clubhouse Description': row[12].strip(),
-                        'Clubhouse Link': row[13].strip(),
-                        'Zoom Title': row[14].strip(),
-                        'Zoom Link': row[15].strip(),
-                        'One tap mobile': row[16].strip(),
-                        'Phone': row[17].strip(),
-                        'Passcode': row[18].strip()
+                        'Location': row[2].strip(),
+                        'Title': row[3].strip(),
+                        'Host': row[4].strip(),
+                        'Volunteers': row[5].strip()
+                        # 'Date': row[0].strip(),
+                        # 'Time': row[1].strip(),
+                        # 'Event': row[2].strip(),
+                        # 'Account': row[3].strip(),
+                        # 'Recurring': row[4].strip(),
+                        # 'Meeting ID': row[5].strip(),
+                        # 'Organizer': row[6].strip(),
+                        # 'Email': row[7].strip(),
+                        # 'Description': row[8].strip(),
+                        # 'ACB Media Description': row[9].strip(),
+                        # 'ACB Media Link': row[10].strip(),
+                        # 'Amazon Call Description': row[11].strip(), 
+                        # 'Clubhouse Description': row[12].strip(),
+                        # 'Clubhouse Link': row[13].strip(),
+                        # 'Zoom Title': row[14].strip(),
+                        # 'Zoom Link': row[15].strip(),
+                        # 'One tap mobile': row[16].strip(),
+                        # 'Phone': row[17].strip(),
+                        # 'Passcode': row[18].strip()
                     }
                     combined.append(event)
     return combined
@@ -119,7 +113,7 @@ def compare(file1, file2):
 def display_csv():
     # sends the intended csv into the index.html file
     file1 = "/Users/leem/Downloads/9.17-9.23-Hosting-final.csv"
-    file2 = "/Users/leem/Downloads/Copy of Recurring events 2023.csv"
+    file2 = "/Users/leem/Downloads/filename_14.csv"
     result = compare(file1, file2)
     return render_template("index.html", csv_data=result)
 
