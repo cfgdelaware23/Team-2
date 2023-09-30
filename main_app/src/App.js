@@ -78,7 +78,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {
-          (firstFile && secondFile) ? <p>Files selected: {firstFileName} and {secondFileName}</p> : 
+          (firstFile && secondFile) ? <p aria-live="polite">Files selected: {firstFileName} and {secondFileName}</p> : 
           <>
             <p>Press 'A' to select the Volunteer Availability File and 'E' to select the Event Schedule File</p>
             <label htmlFor="firstFileInput">
