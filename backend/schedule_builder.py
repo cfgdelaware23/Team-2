@@ -1,5 +1,10 @@
+# schedule_builder.py contains the functions used to generate the event 
+# schedule for the week 
 
-# in the format key=name, value=[{set of skills}, {key=day-of-week, value=[set of available hours in 24-hour format]]
+# The following dictionaries, volunteers and events, are only sample data 
+# used for testing
+
+# Volunteer data is in the fomat of: {Name: [{set of skills}, {availabilities}]}
 volunteers = {"Anna": 
                 [
                     {"skill1", "skill2"},
@@ -20,7 +25,7 @@ volunteers = {"Anna":
                 ]
                 }
 
-# in the format key=event, value=[{set of skills}, day-of-week, [list of hours in 24-hour format], # of volunteers]
+# Event data in the format {Event_Name: [{required skills}, "Day", [time], number of volunteers, other data]
 events = {"event1":
           [
               {"skill1"},
@@ -45,43 +50,35 @@ events = {"event1":
           ]}
 
 
+# Generates an array that represents a row in the final schedule spreadsheet 
 def build_schedule(events, volunteers):
-    #hold the transformed output
+    # Holds the transformed output
     result = []
+    # Iterates through events for the week
     for event in events:
         event_info = events[event]
         day = event_info[1]
         time_range = "-".join(map(str, event_info[2]))
-        
+
+        # List of matched volunteers to the event
         volunteers_for_event = list_of_volunteers_for_event(event, events, volunteers)
-        # print(volunteers_for_event)
 
-        # filling in data
+        # Filling in the data for the row
         row = [day, time_range, event, event_info[6], event_info[4], volunteers_for_event]
-
-        '''
-        # adding facilitator and streamer (or placeholders if not available)
-        row.append(volunteers_for_event[0] if len(volunteers_for_event) > 0 else "dummy facilitator")
-        row.append(volunteers_for_event[1] if len(volunteers_for_event) > 1 else "dummy streamer")
-        '''
-
-        #placeholder broadcaster
-        #row.append("dummy broadcaster")
         
         result.append(row)
     
     return result
 
 
-
-# Match skill set and list of hours
+# Match the skill set and the list of hours of an event to volunteers
 def list_of_volunteers_for_event(event, events, volunteers):
     selected_volunteers = []
     all_volunteers = list(volunteers.keys())
 
     # Check if the event is in the set of events
     if event in events:
-        # Isolate part of the event data into variables
+        # Isolate parts of the event data into variables for organization
         event_info = events[event]
         num_volunteers = event_info[3]
         skills_needed = event_info[0]
@@ -94,12 +91,10 @@ def list_of_volunteers_for_event(event, events, volunteers):
             available_hours = volunteers[volunteer][1][day]
             # Isolate the list of skills the volunteer has
             skills = volunteers[volunteer][0]
-            # print(hours_needed)
-            # print(available_hours)
+
             # Check the volunteer is available and has matching skills
             if ((set(hours_needed).issubset(set(available_hours))) 
                 and skills_needed.issubset(skills)):
-                # print(f"Matched {volunteer} to event {event}")
                 selected_volunteers.append(volunteer)
                 remove_hours_from_volunteer(volunteer, day, hours_needed, volunteers)
                 # Decrement counter
@@ -109,53 +104,17 @@ def list_of_volunteers_for_event(event, events, volunteers):
                 pass
     
     return selected_volunteers
-'''
-Pseudocode:
-goal: return a list of volunteers for the event and remove those hours for the volunteers
 
-list of all volunteers, pop() when checking a volunteer
-remove facilitators of the event from the list (they can't be volunteers)
-volunteer is a match if:
-- skills match and hours match
-        - hours_needed of the event is a subset of available_hours of the volunteer
-        - skills_needed is a subset of skills of the volunteer
-when a volunteer match is found:
-- remove taken hours
-- add volunteer to list
 
-'''
-'''
-function to remove taken hours
-'''
-# name is data type string, day is type string, hours is a list of ints
+# Remove the available hours from the volunteer when selected for an event
 def remove_hours_from_volunteer(name, day, hours, volunteers):
     if name in volunteers:
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
-
+# Main function used only for testing
 def main():
     print(build_schedule(events, volunteers))
     
 
 if __name__ == "__main__":
     main()
-
-
-'''
-# Big dictionary
-
-{
-key=event_name 
-value=[volunteers]
-}
-
-{
-"event1":["Anna","Jason"],
-"event2":["person3","person4"]
-}
-'''
-
-"""
-current output - {'event1'(this is day): ['Jason', 'Anna'], 'event2': ['Debanjan', 'Anna']}
-needed output - [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
-"""
