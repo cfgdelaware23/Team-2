@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-//import './api.js';
+import apiLayer from './api';
+import * as xlsx from 'xlsx';
 
 function App() {
   const [file, setFile] = useState(null);
@@ -8,7 +9,16 @@ function App() {
   const handleDrop = (e) => {
     e.preventDefault();
     const droppedFile = e.target.files[0];
-    //Selecting file is possible with just keyboard
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const data = e.target.result;
+        const workbook = xlsx.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = xlsx.utils.sheet_to_json(worksheet);
+        apiLayer(json);
+    };
+    reader.readAsArrayBuffer(e.dataTransfer.files[0]);
     setFile(droppedFile);
     //apiLayer(file);
   };
