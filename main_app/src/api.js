@@ -1,5 +1,5 @@
-function apiLayer(data) {
-  const formattedData = data.map((d) => {
+function apiLayer(volunteerAvailability, eventSchedule) {
+  const formattedVolunteerData = volunteerAvailability.map((d) => {
     return (
       {
         "name": d.Name,
@@ -16,10 +16,11 @@ function apiLayer(data) {
       }
     );
   });
+  console.log(eventSchedule);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formattedData)
+    body: JSON.stringify(formattedVolunteerData)
   };
   fetch("/getSchedule", requestOptions).then((res) =>
       res.json().then((d) => {
