@@ -6,6 +6,5 @@ app = Flask(__name__)
 def hello_world():
     content = request.json
     print(content)
-    return {
-        "message": "Hello, World!"
-    }
+    # next step - call Anna's function
+    return content
