@@ -36,10 +36,31 @@ events = {"event1":
           ]}
 
 def build_schedule(events):
-    schedule = {}
+    #hold the transformed output
+    result = []
+
     for event in events:
-        schedule[event] = list_of_volunteers_for_event(event)
-    return schedule
+        event_info = events[event]
+        day = event_info[1]
+        time_range = "-".join(map(str, event_info[2]))
+        
+        volunteers_for_event = list_of_volunteers_for_event(event)
+
+        # filling in data
+        row = [day, time_range, event, "dummy acc", "dummy host", "dummy mod"]
+
+        # adding facilitator and streamer (or placeholders if not available)
+        row.append(volunteers_for_event[0] if len(volunteers_for_event) > 0 else "dummy facilitator")
+        row.append(volunteers_for_event[1] if len(volunteers_for_event) > 1 else "dummy streamer")
+        
+        #placeholder broadcaster
+        row.append("dummy broadcaster")
+        
+        result.append(row)
+    
+    return result
+
+
 
 # Match skill set and list of hours
 def list_of_volunteers_for_event(event):
@@ -118,3 +139,8 @@ value=[volunteers]
 "event2":["person3","person4"]
 }
 '''
+
+"""
+current output - {'event1'(this is day): ['Jason', 'Anna'], 'event2': ['Debanjan', 'Anna']}
+needed output - [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
+"""
