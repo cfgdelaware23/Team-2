@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import apiLayer from './api';
 import * as xlsx from 'xlsx';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [firstFile, setFirstFile] = useState(null);
@@ -43,13 +44,17 @@ function App() {
     } else if (e.key === 'e') {
       document.getElementById("secondFileInput").click();
       speak("Event Schedule File dialog opened. Please select the file.");
-    }
+    } else if (e.key === 'Enter' && firstFile && secondFile) {
+      window.location.href = "/EmailTemplate";
+  }
   }
 
   useEffect(() => {
+    if (firstFile && secondFile)
+      speak("Press enter to generate email template");
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
+  }, [firstFile, secondFile]);
 
   function speak(message) {
     const synth = window.speechSynthesis;
@@ -57,28 +62,13 @@ function App() {
     synth.speak(sound);
   }
 
-  function downloadCSV(csv, filename) {
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = url;
-    a.download = filename;
-  
-    document.body.appendChild(a);
-    a.click();
-  
-    window.URL.revokeObjectURL(url);
-  }
-  
-
   //"Label" semantic HTML tag
   //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
   return (
     <div className="App">
       <header className="App-header">
         {
-          (firstFile && secondFile) ? <p>Files selected: {firstFileName} and {secondFileName}</p> : 
+          (firstFile && secondFile) ? <p aria-live="polite">Files selected: {firstFileName} and {secondFileName}</p> : 
           <>
             <p>Press 'A' to select the Volunteer Availability File and 'E' to select the Event Schedule File</p>
             <label htmlFor="firstFileInput">
@@ -91,7 +81,10 @@ function App() {
             </label>
           </>
         }
-      </header>
+          <div className="link-wrapper" role="button" aria-label="Navigate to Generate Email Template">
+            <Link className="button-link" to="EmailTemplate" >Generate Email Template</Link>
+          </div>      
+        </header>
     </div>
   );
 }

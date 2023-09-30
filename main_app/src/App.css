@@ -58,3 +58,34 @@ p {
   font-size: 32px;
   line-height: 1.5;
 }
+
+button{
+  margin-top: 20px;
+  font-size: 25px;
+  width: 250px;
+  height: 100px;;
+}
+
+.button-link {
+  background-color: blue;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+  background-color: lightblue;
+}
+
+.link-wrapper {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+}
