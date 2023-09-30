@@ -1,5 +1,6 @@
 from flask import Flask, request
 from schedule_builder import build_schedule
+from csv_html import read_csv, jsonify
 import json
 
 app = Flask(__name__)
@@ -12,7 +13,14 @@ def hello_world():
     content = request.json
     print(content)
     # next step - call Anna's function
-    return content
+    # Extract and print each key-value pair
+    for key, value in content.items():
+        # Adding to volunteers dictionary
+        print(f"Key: {key}")
+        print(f"Value: {value}")
+        skills = {}
+        availability = {}
+        volunteers[key] = []
 
 @app.route('/get-events', methods = ['GET'])
 def getSelectedEvents():
