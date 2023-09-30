@@ -22,8 +22,8 @@ def convert_to_csv(event_info):
         return ','.join(cleaned_parts)
 
 # Sample list of event-related strings
-#event_info_list = [['Monday', '3-4-5', 'event1', 'account', 'organizer'], ['Tuesday', '6-7', 'event2', 'account', 'organizer']]
-event_info_list= [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
+event_info_list = [['Monday', '3-4-5', 'event1', 'account', 'organizer'], ['Tuesday', '6-7', 'event2', 'account', 'organizer']]
+#event_info_list= [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
 csv_output = convert_to_csv(event_info_list)
 
 # print

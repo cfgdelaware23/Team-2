@@ -2,7 +2,6 @@ from flask import Flask, request
 from schedule_builder import build_schedule
 from csv_html import read_csv, jsonify
 from outputToCSV import convert_to_csv
-import json
 
 app = Flask(__name__)
 
@@ -39,14 +38,16 @@ def hello_world():
         account = event['account']
         recurrence = event['recurrence']
         time = event['time']
-        num_volunteers = None
+        num_volunteers = int(None)
 
         events[name] = [skill, day, time, num_volunteers, organizer, meetingID, 
                         account, recurrence]
     
     # call build_schedule
     schedule_list = build_schedule(events, volunteers)
-    schedule_cvs = convert_to_csv(schedule_list)
+    schedule_csv= convert_to_csv(schedule_list)
+
+    return schedule_csv
     
 
 @app.route('/get-events', methods = ['GET'])
