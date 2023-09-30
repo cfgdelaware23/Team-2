@@ -2,16 +2,16 @@
 The primary goal of our program is to match volunteers to events based on their skill set and availability. We'll be discussing the data structure used, the logic for the match, and the conversion of the data to CSV & HTML. Additionally, we'll dive into automating this data into Outlook emails.
 
 We store volunteer data in a dictionary with:
-*Key: Volunteer's name
-*Value: List of skills
+* Key: Volunteer's name
+* Value: List of skills
 * Days of availability with corresponding hours
 
 For events, we have:
-*Key: Event name
-*Value: Required skills
-*Day of the week
-*Hours
-*Number of volunteers
+* Key: Event name
+* Value: Required skills
+* Day of the week
+* Hours
+* Number of volunteers
 
 Go through each event to find a match.
 Check for each volunteer if:
