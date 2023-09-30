@@ -11,7 +11,8 @@ def convert_to_csv(event_info):
     
     return csv_string
 
-event_info_list = [" Day ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
+event_info_list= [" Day,day2 ", " Time ", "Title", " Account", " Host", "Moderator", " Facilitator ", "Streamer", " Broadcaster"]
+
 csv_output = convert_to_csv(event_info_list)
 print(csv_output)
 
