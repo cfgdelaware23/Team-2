@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import apiLayer from './api';
 import * as xlsx from 'xlsx';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [firstFile, setFirstFile] = useState(null);
@@ -91,6 +92,7 @@ function App() {
             </label>
           </>
         }
+        <button><Link to="EmailTemplate">GENERATE EMAIL TEMPLATE</Link></button>
       </header>
     </div>
   );
