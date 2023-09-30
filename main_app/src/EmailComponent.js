@@ -5,9 +5,9 @@ function EmailComponent(props) {
     <>
       <h2>{props.title}</h2>
       <h2>{props.description}</h2>
-      {props.acb_link != "" && <a href={props.acb_link}>{props.acb_desc}</a>}
-      {props.amazon_call != "" && <h2>{props.amazon_call}</h2>}
-      {props.clubhouse_link != "" && <a href={props.clubhouse_link}>{props.clubhouse_desc}</a>}
+      {props.acb_link !== "" && <a href={props.acb_link}>{props.acb_desc}</a>}
+      {props.amazon_call !== "" && <h2>{props.amazon_call}</h2>}
+      {props.clubhouse_link !== "" && <a href={props.clubhouse_link}>{props.clubhouse_desc}</a>}
       <h2>Join the call:</h2>
       <a href={props.zoom_link}>{props.zoom_title}</a>
       <h3>One tap mobile: </h3>
