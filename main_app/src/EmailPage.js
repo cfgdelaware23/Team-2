@@ -1,5 +1,6 @@
 import React from 'react'
 import EmailComponent from './EmailComponent'
+import { useState, useEffect } from 'react'
 
 function EmailPage() {
 
@@ -14,7 +15,7 @@ function EmailPage() {
     useEffect(() => {
       fetch("/getSchedule").then(
         res => res.json()
-      ).then(
+      ).then( 
         data => {
           setEvents(data)
           console.log(data)
