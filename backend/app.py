@@ -11,7 +11,7 @@ volunteers = {}
 events = {}
 
 @app.route("/getSchedule", methods=['POST'])
-def build_schedule():
+def generate_schedule():
     content = request.json
     # Extract each key-value pair from the json for each volunteer and 
     # format it for the build_schedule function
