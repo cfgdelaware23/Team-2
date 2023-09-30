@@ -8,7 +8,7 @@ function App() {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const droppedFile = e.dataTransfer.files[0];
+    const droppedFile = e.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
         const data = e.target.result;
@@ -20,16 +20,23 @@ function App() {
     };
     reader.readAsArrayBuffer(e.dataTransfer.files[0]);
     setFile(droppedFile);
+    //apiLayer(file);
   };
 
-  const handleDefaultDrag = (e) => {
-    e.preventDefault();
-  }
-
+  //"Label" semantic HTML tag
+  //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
   return (
-    <div className="App" onDrop={handleDrop} onDragOver={handleDefaultDrag}>
+    <div className="App">
       <header className="App-header">
-        {file ? <p>File dropped: {file.name}</p> : <p>Drag and drop an Excel file here</p>}
+        {
+          file ? <p>File dropped: {file.name}</p> : 
+          <>
+            <label htmlFor="fileInput">
+              Use the Browse button to select an Excel file from your device:
+              <input type="file" id="fileInput" onChange={handleDrop} aria-describedby="fileInput" />
+            </label>
+          </>
+        }
       </header>
     </div>
   );
