@@ -11,8 +11,6 @@ function App() {
   const [secondFileName, setSecondFileName] = useState(null);
 
   const handleDrop = (type) => (e) => {
-    const files = e.dataTransfer.files[0];
-
     const reader = new FileReader();
     reader.onload = (e) => {
       const data = e.target.result;
