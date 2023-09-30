@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import apiLayer from './api';
 import * as xlsx from 'xlsx';
@@ -29,8 +29,19 @@ function App() {
           apiLayer(json, secondFile);
     };
     reader.readAsArrayBuffer(e.dataTransfer.files[0]);
-    //apiLayer(file);
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'a')
+      document.getElementById("firstFileInput").click();
+    else if (e.key === 'e')
+      document.getElementById("secondFileInput").click();
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   //"Label" semantic HTML tag
   //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
@@ -41,14 +52,14 @@ function App() {
           (firstFile && secondFile) ? 
           <p>Files selected: {firstFile.name} and {secondFile.name}</p> : 
           <>
-            <p>Use the Browse button to select the Excel files from your device</p>
+            <p>Press 'A' to select the Volunteer Availability File and 'E' to select the Event Schedule File</p>
             <label htmlFor="firstFileInput">
-              Select Volunteer Availability File:
-              <input type="file" id="firstFileInput" onChange={handleDrop("first")} aria-describedby="fileInput" />
+              Select Volunteer Availability File:&nbsp;
+              <input type="file" id="firstFileInput" onChange={handleDrop("first")} aria-describedby="fileInput" aria-label="Choose Volunteer Availability File"/>
             </label>
             <label htmlFor="secondFileInput">
-              Select Event Schedule File:
-              <input type="file" id="secondFileInput" onChange={handleDrop("second")} aria-describedby="fileInput" />
+              Select Event Schedule File:&nbsp;
+              <input type="file" id="secondFileInput" onChange={handleDrop("second")} aria-describedby="fileInput" aria-label="Choose Event Schedule File"/>
             </label>
           </>
         }
