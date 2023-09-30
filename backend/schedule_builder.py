@@ -1,4 +1,4 @@
-'''
+
 # in the format key=name, value=[{set of skills}, {key=day-of-week, value=[set of available hours in 24-hour format]]
 volunteers = {"Anna": 
                 [
@@ -9,7 +9,7 @@ volunteers = {"Anna":
                 "Jason":
                 [
                     {"skill1"},
-                    {"Monday":[3,4],
+                    {"Monday":[3,4,5],
                      "Tuesday":[]}
                 ],
                 "Debanjan":
@@ -25,17 +25,25 @@ events = {"event1":
           [
               {"skill1"},
               "Monday",
-              [3,4],
-              2
+              [3,4,5],
+              2,
+              "organizer",
+              "meetingID",
+              "account",
+              "recurrence"
           ],
           "event2":
           [
               {"skill2"},
               "Tuesday",
               [6,7],
-              2
+              2,
+              "organizer",
+              "meetingID",
+              "account",
+              "recurrence"
           ]}
-'''
+
 
 def build_schedule(events, volunteers):
     #hold the transformed output
@@ -49,14 +57,16 @@ def build_schedule(events, volunteers):
         volunteers_for_event = list_of_volunteers_for_event(event, events, volunteers)
 
         # filling in data
-        row = [day, time_range, event, "dummy acc", "dummy host", "dummy mod"]
+        row = [day, time_range, event, event_info[6], event_info[4]]
 
+        '''
         # adding facilitator and streamer (or placeholders if not available)
         row.append(volunteers_for_event[0] if len(volunteers_for_event) > 0 else "dummy facilitator")
         row.append(volunteers_for_event[1] if len(volunteers_for_event) > 1 else "dummy streamer")
-        
+        '''
+
         #placeholder broadcaster
-        row.append("dummy broadcaster")
+        #row.append("dummy broadcaster")
         
         result.append(row)
     
@@ -120,15 +130,15 @@ def remove_hours_from_volunteer(name, day, hours, volunteers):
     if name in volunteers:
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
-'''
+
 def main():
-    print(build_schedule(events))
+    print(build_schedule(events, volunteers))
     
 
 if __name__ == "__main__":
     main()
 
-'''
+
 '''
 # Big dictionary
 
