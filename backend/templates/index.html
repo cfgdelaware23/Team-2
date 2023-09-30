@@ -2,10 +2,71 @@
 <html>
 <head>
     <title>Formatted CSV Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">    
 </head>
 <body>
-    <h1>Formatted CSV Data:</h1>
-    {% comment %} {{for i in range(len(formatted_data))}}
-        {{}} {% endcomment %}
+    <h1>ACB Daily Schedule</h1>
+    {% for entry in csv_data %}
+    <div class="event">
+        <p>
+            <strong>Date:</strong> {{ entry['Date'] }}
+        </p>
+        <p>
+            <strong>Time:</strong> {{ entry['Time'] }}
+        </p>
+        <p>
+            <strong>Event:</strong> {{ entry['Event'] }}
+        </p>
+        <p>
+            <strong>Account:</strong> {{ entry['Account'] }}
+        </p>
+        <p>
+            <strong>Recurring:</strong> {{ entry['Recurring'] }}
+        </p>
+        <p>
+            <strong>Meeting ID:</strong> {{ entry['Meeting ID'] }}
+        </p>
+        <p>
+            <strong>Organizer:</strong> {{ entry['Organizer'] }}
+        </p>
+        <p>
+            <strong>Email:</strong> {{ entry['Email'] }}
+        </p>
+        <p>
+            <strong>Description:</strong> {{ entry['Description'] }}
+        </p>
+        <p>
+            <strong>ACB Media Description:</strong> {{ entry['ACB Media Description'] }}
+        </p>
+        <p>
+            <strong>ACB Media Link:</strong> {{ entry['ACB Media Link'] }}
+        </p>
+        <p>
+            <strong>Amazon Call Description:</strong> {{ entry['Amazon Call Description'] }}
+        </p>
+        <p>
+            <strong>Clubhouse Description:</strong> {{ entry['Clubhouse Description'] }}
+        </p>
+        
+        <p>
+            <strong>Clubhouse Link:</strong> {{ entry['Clubhouse Link'] }}
+        </p>
+        <p>
+            <strong>Zoom Title:</strong> {{ entry['Zoom Title'] }}
+        </p>
+        <p>
+            <strong>Zoom Link:</strong> {{ entry['Zoom Link'] }}
+        </p>
+        <p>
+            <strong>One tap mobile:</strong> {{ entry['One tap mobile'] }}
+        </p>
+        <p>
+            <strong>Phone:</strong> {{ entry['Phone'] }}
+        </p>
+        <p>
+            <strong>Passcode:</strong> {{ entry['Passcode'] }}
+        </p>
+    </div>
+    {% endfor %}
 </body>
 </html>
