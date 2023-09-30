@@ -28,13 +28,10 @@ function apiLayer(volunteerAvailability, eventSchedule) {
       }
     );
   })
-  console.log(formattedVolunteerData);
-  console.log(formattedEventData);
   const json = {
     "volunteerData": formattedVolunteerData,
     "eventData": formattedEventData
   }
-  console.log(json);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

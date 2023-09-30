@@ -11,8 +11,6 @@ events = {}
 @app.route("/getSchedule", methods=['POST'])
 def hello_world():
     content = request.json
-    # print(content)
-    # next step - call Anna's function
     # Extract each key-value pair for volunteer and format it for 
     # build_schedule function
     for volunteer in content['volunteerData']:
@@ -47,7 +45,6 @@ def hello_world():
     schedule_list = build_schedule(events, volunteers)
     schedule_csv = convert_to_csv(schedule_list)
 
-    # print(schedule_csv)
     return {
         "schedule": schedule_csv
     }
