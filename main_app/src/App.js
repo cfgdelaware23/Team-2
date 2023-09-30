@@ -37,10 +37,13 @@ function App() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'a')
+    if (e.key === 'a') {
       document.getElementById("firstFileInput").click();
-    else if (e.key === 'e')
+      speak("Volunteer Availability File dialog opened. Please select the file.");
+    } else if (e.key === 'e') {
       document.getElementById("secondFileInput").click();
+      speak("Event Schedule File dialog opened. Please select the file.");
+    }
   }
 
   useEffect(() => {
@@ -48,14 +51,19 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  function speak(message) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(message);
+    synth.speak(utterance);
+  }  
+
   //"Label" semantic HTML tag
   //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
   return (
     <div className="App">
       <header className="App-header">
         {
-          (firstFile && secondFile) ? 
-          <p>Files selected: {firstFileName} and {secondFileName}</p> : 
+          (firstFile && secondFile) ? <p>Files selected: {firstFileName} and {secondFileName}</p> : 
           <>
             <p>Press 'A' to select the Volunteer Availability File and 'E' to select the Event Schedule File</p>
             <label htmlFor="firstFileInput">
