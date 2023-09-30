@@ -43,11 +43,11 @@ function App() {
           <>
             <p>Use the Browse button to select the Excel files from your device</p>
             <label htmlFor="firstFileInput">
-              Select Schedule File:
+              Select Volunteer Availability File:
               <input type="file" id="firstFileInput" onChange={handleDrop("first")} aria-describedby="fileInput" />
             </label>
             <label htmlFor="secondFileInput">
-              Select Final Schedule File:
+              Select Event Schedule File:
               <input type="file" id="secondFileInput" onChange={handleDrop("second")} aria-describedby="fileInput" />
             </label>
           </>
