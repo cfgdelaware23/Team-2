@@ -48,7 +48,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
           const a = document.createElement('a');
           a.style.display = 'none';
           a.href = url;
-          a.download = "filename";
+          a.download = "schedule";
         
           document.body.appendChild(a);
           a.click();
