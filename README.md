@@ -25,9 +25,9 @@ For events, we have:
 Our schedule building algorithm works as follows:
 1. Go through each event in the list of all events to find a match
 2. For the number of volunteers needed the the event, find a matching volunteer
- * A volunteer is a match if:
-   * Their skills match the event's requirements.
-   * Their available hours overlap with the event's hours.
+   * A volunteer is a match if:
+     * Their skills match the event's requirements.
+     * Their available hours overlap with the event's hours.
 3. We then remove those matched hours from the volunteer's availability.
 
 After matching, we convert the data into a CSV format. The structure becomes:
