@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import csv
-from json import dumps
+# from json import dumps
 from datetime import datetime
 import pandas
 # sample csv file, will be replaced with the CSV file sent through
@@ -23,9 +23,7 @@ def excelToCsv():
 
     csv_file = "fileOutput.csv"
     
-    read_file.to_csv (csv_file, 
-                  index = None,
-                  header=True)
+    read_file.to_csv (csv_file, index = None, header=True)
     return csv_file
     
 def read_csv():
@@ -38,9 +36,34 @@ def read_csv():
         skip = next(csv_reader) 
         for row in csv_reader:
             day = row[0].strip().lower()
-            # append the next day to the array 
+            # events are added to a dictionary, that is then appended to a list
             if day == currentWeekday:
-                eventsArray.append(row)
+                print(row)
+                event = {
+                    'Date': row[0].strip(),
+                    'Time': row[1].strip(),
+                    'Event': row[2].strip(),
+                    'Account': row[3].strip(),
+                    'Recurring': row[4].strip(),
+                    'Meeting ID': row[5].strip(),
+                    'Organizer': row[6].strip(),
+                    'Email': row[7].strip(),
+                    'Description': row[8].strip(),
+                    'ACB Media Description': row[9].strip(),
+                    'ACB Media Link': row[10].strip(),
+                    'Amazon Call Description': row[11].strip(), 
+                    'Clubhouse Description': row[12].strip(),
+                    'Clubhouse Link': row[13].strip(),
+                    'Zoom Title': row[14].strip(),
+                    'Zoom Link': row[15].strip(),
+                    'One tap mobile': row[16].strip(),
+                    'Phone': row[17].strip(),
+                    'Passcode': row[18].strip()
+                }
+                eventsArray.append(event)
+    # debugging for the index 
+    # for i in range(len(eventsArray)):
+    #     print(eventsArray[i])
     return eventsArray
 
 
