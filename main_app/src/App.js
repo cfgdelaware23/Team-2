@@ -29,6 +29,11 @@ function App() {
           apiLayer(json, secondFile);
     };
     reader.readAsArrayBuffer(e.dataTransfer.files[0]);
+
+    if (type === "first")
+      setFirstFileName(e.dataTransfer.files[0].name);
+    else if (type === "second")
+      setSecondFileName(e.dataTransfer.files[0].name);
   };
 
   const handleKeyPress = (e) => {
