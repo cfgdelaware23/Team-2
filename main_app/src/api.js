@@ -1,4 +1,5 @@
 function apiLayer(volunteerAvailability, eventSchedule) {
+  // Parse the volunteer data and reformat for API transaction
   const formattedVolunteerData = volunteerAvailability.map((d) => {
     return (
       {
@@ -14,6 +15,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
       }
     );
   });
+  // Parse the event fata and reformat for API transaction
   const formattedEventData = eventSchedule.map((e) => {
     return (
       {
@@ -28,6 +30,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
       }
     );
   })
+  // Combine both sets of data into one object
   const json = {
     "volunteerData": formattedVolunteerData,
     "eventData": formattedEventData
@@ -39,6 +42,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
   };
   fetch("/getSchedule", requestOptions).then((res) =>
       res.json().then((d) => {
+          // When data is received, download the CSV straight to the browser
           const blob = new Blob([d.schedule], { type: 'text/csv' });
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement('a');
@@ -54,6 +58,7 @@ function apiLayer(volunteerAvailability, eventSchedule) {
   );
 }
 
+// Convert time format from spreadsheet into array of integers for API transaction
 function convertTimes(times) {
   if (times === "None")
     return [];

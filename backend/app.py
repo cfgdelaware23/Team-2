@@ -51,6 +51,7 @@ def hello_world():
     # Convert schedule to CSV for the event schedule spreadsheet
     schedule_csv = convert_to_csv(schedule_list)
 
+    # Return the final schedule
     return {
         "schedule": schedule_csv
     }
