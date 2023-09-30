@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import csv
-# from json import dumps
 from datetime import datetime
 import pandas
+
 # sample csv file, will be replaced with the CSV file sent through
 
 app = Flask(__name__)
@@ -37,7 +37,6 @@ def read_csv():
             day = row[0].strip().lower()
             # events are added to a dictionary, that is then appended to a list
             if day == currentWeekday:
-                print(row)
                 event = {
                     'Date': row[0].strip(),
                     'Time': row[1].strip(),
@@ -65,10 +64,10 @@ def read_csv():
     #     print(eventsArray[i])
     return eventsArray
 
-
+    
 @app.route('/')
 def display_csv():
-    ## sends the intended csv into the index.html file
+    # sends the intended csv into the index.html file
     result = read_csv()
     return render_template("index.html", csv_data=result)
 

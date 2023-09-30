@@ -37,10 +37,13 @@ function App() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'a')
+    if (e.key === 'a') {
       document.getElementById("firstFileInput").click();
-    else if (e.key === 'e')
+      speak("Volunteer Availability File dialog opened. Please select the file.");
+    } else if (e.key === 'e') {
       document.getElementById("secondFileInput").click();
+      speak("Event Schedule File dialog opened. Please select the file.");
+    }
   }
 
   useEffect(() => {
@@ -48,14 +51,34 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  function speak(message) {
+    const synth = window.speechSynthesis;
+    const sound = new SpeechSynthesisUtterance(message);
+    synth.speak(sound);
+  }
+
+  function downloadCSV(csv, filename) {
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = filename;
+  
+    document.body.appendChild(a);
+    a.click();
+  
+    window.URL.revokeObjectURL(url);
+  }
+  
+
   //"Label" semantic HTML tag
   //ARIA (Accessible Rich Internet Applications) Attributes. "Aria Label" provides extra information to screen reader users.
   return (
     <div className="App">
       <header className="App-header">
         {
-          (firstFile && secondFile) ? 
-          <p>Files selected: {firstFileName} and {secondFileName}</p> : 
+          (firstFile && secondFile) ? <p>Files selected: {firstFileName} and {secondFileName}</p> : 
           <>
             <p>Press 'A' to select the Volunteer Availability File and 'E' to select the Event Schedule File</p>
             <label htmlFor="firstFileInput">
