@@ -1,7 +1,11 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/getSchedule", methods=['POST'])
 def hello_world():
-    return "<p>Hello, World!</p>"
+    content = request.json
+    print(content)
+    return {
+        "message": "Hello, World!"
+    }
