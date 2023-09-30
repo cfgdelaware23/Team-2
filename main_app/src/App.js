@@ -11,6 +11,8 @@ function App() {
   const [secondFileName, setSecondFileName] = useState(null);
 
   const handleDrop = (type) => (e) => {
+    const files = e.currentTarget.files[0];
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const data = e.target.result;
@@ -29,7 +31,7 @@ function App() {
       else if (secondFile && type === "first")
           apiLayer(json, secondFile);
     };
-    reader.readAsArrayBuffer(e.dataTransfer.files[0]);
+    reader.readAsArrayBuffer(files);
 
     if (type === "first")
       setFirstFileName(e.dataTransfer.files[0].name);
