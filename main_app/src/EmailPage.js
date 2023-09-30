@@ -1,6 +1,5 @@
 import React from 'react'
 import EmailComponent from './EmailComponent'
-import { useState, useEffect } from 'react'
 
 function EmailPage() {
 
@@ -22,6 +21,7 @@ function EmailPage() {
     //     }
     //   )
     // }, [])
+
   const events = [
     {
       title: "ACB Presents The Daily Schedule",
@@ -95,6 +95,7 @@ function EmailPage() {
     }
   ]
 
+  // maps through all events and renders EmailComponent for each
   return (
     <>
       <h1>Sunday September 17, 2023</h1>
