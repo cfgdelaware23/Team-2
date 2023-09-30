@@ -4,6 +4,9 @@ import json
 
 app = Flask(__name__)
 
+volunteers = {}
+events = {}
+
 @app.route("/getSchedule", methods=['POST'])
 def hello_world():
     content = request.json
@@ -12,5 +15,9 @@ def hello_world():
     # Extract and print each key-value pair
 
     for key, value in content.items():
+        # Adding to volunteers dictionary
         print(f"Key: {key}")
         print(f"Value: {value}")
+        skills = {}
+        availability = {}
+        volunteers[key] = []
