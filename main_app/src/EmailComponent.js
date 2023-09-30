@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
+// component that renders the standard email format based on the passed in information
 function EmailComponent(props) {
   return (
     <>

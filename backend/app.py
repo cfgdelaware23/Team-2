@@ -5,16 +5,16 @@ from outputToCSV import convert_to_csv
 
 app = Flask(__name__)
 
+# Dictionary containing volunteer data
 volunteers = {}
+# Dictionary containing event data
 events = {}
 
 @app.route("/getSchedule", methods=['POST'])
-def hello_world():
+def generate_schedule():
     content = request.json
-    # print(content)
-    # next step - call Anna's function
-    # Extract each key-value pair for volunteer and format it for 
-    # build_schedule function
+    # Extract each key-value pair from the json for each volunteer and 
+    # format it for the build_schedule function
     for volunteer in content['volunteerData']:
         name = volunteer['name']
         skills = set(volunteer['skills'])
@@ -29,6 +29,8 @@ def hello_world():
         
         volunteers[name] = [skills, availability]
 
+    # Extract each key-value pair from the json for each event and 
+    # format it for the build_schedule function
     for event in content["eventData"]:
         skill = set(event["skillsNeeded"])
         name = event['eventName']
@@ -40,14 +42,16 @@ def hello_world():
         time = event['time']
         num_volunteers = 2
 
+        # Add finalized event details to dictionary of all events
         events[name] = [skill, day, time, num_volunteers, organizer, meetingID, 
                         account, recurrence]
     
-    # call build_schedule
+    # Call build_schedule function to return a row output for final schedule
     schedule_list = build_schedule(events, volunteers)
+    # Convert schedule to CSV for the event schedule spreadsheet
     schedule_csv = convert_to_csv(schedule_list)
 
-    # print(schedule_csv)
+    # Return the final schedule
     return {
         "schedule": schedule_csv
     }
