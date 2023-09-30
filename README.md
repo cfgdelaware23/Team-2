@@ -1,7 +1,7 @@
 # Team-2
 # DocuParse #
 
-We developed _DocuParse_ for the American Council of the Blind, which is a nationwide non-profit organization supporting individuals who are blind and visually impaired. _DocuParse_ is a web application that allows for the automation of schedule building and email sending, which would otherwise be a long and tedious task when done manually.
+We developed _DocuParse_ for the American Council of the Blind, which is a nationwide non-profit organization supporting individuals who are blind and visually impaired. _DocuParse_ is a web application that allows for the automation of schedule building and email sending, which would otherwise be a long and tedious task when done manually. _DocuParse_ also supports Text to speech (TTS) technology that allows for those who are blind and visually impaired to easily navigate and use the application.
 
 <img width="1070" alt="Screen Shot 2023-09-30 at 10 36 16 AM" src="https://github.com/cfgdelaware23/Team-2/assets/84740209/58babd60-f454-48bb-9e3a-6d48c440e13b">
 
