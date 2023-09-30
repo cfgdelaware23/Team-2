@@ -1,8 +1,9 @@
 # Team-2
 # DocuParse #
-<img width="1070" alt="Screen Shot 2023-09-30 at 10 36 16 AM" src="https://github.com/cfgdelaware23/Team-2/assets/84740209/58babd60-f454-48bb-9e3a-6d48c440e13b">
 
 We developed _DocuParse_ for the American Council of the Blind, which is a nationwide non-profit organization supporting individuals who are blind and visually impaired. _DocuParse_ is a web application that allows for the automation of schedule building and email sending, which would otherwise be a long and tedious task.
+
+<img width="1070" alt="Screen Shot 2023-09-30 at 10 36 16 AM" src="https://github.com/cfgdelaware23/Team-2/assets/84740209/58babd60-f454-48bb-9e3a-6d48c440e13b">
 
 The primary goal of our program is to match volunteers to events based on their skill set and availability. We'll be discussing the data structure used, the logic for the match, and the conversion of the data to CSV & HTML. Additionally, we'll dive into automating this data into Outlook emails.
 
@@ -24,9 +25,9 @@ For events, we have:
 Our schedule building algorithm works as follows:
 1. Go through each event in the list of all events to find a match
 2. For the number of volunteers needed the the event, find a matching volunteer
-* A volunteer is a match if:
-  * Their skills match the event's requirements.
-  * Their available hours overlap with the event's hours.
+ * A volunteer is a match if:
+   * Their skills match the event's requirements.
+   * Their available hours overlap with the event's hours.
 3. We then remove those matched hours from the volunteer's availability.
 
 After matching, we convert the data into a CSV format. The structure becomes:
