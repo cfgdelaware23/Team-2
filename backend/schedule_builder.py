@@ -118,6 +118,7 @@ def remove_hours_from_volunteer(name, day, hours):
     if name in volunteers:
         volunteers[name][1][day] = list(set(volunteers[name][1][day]) - set(hours))
 
+'''
 def main():
     print(build_schedule(events))
     
@@ -125,7 +126,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-
+'''
 '''
 # Big dictionary
 
