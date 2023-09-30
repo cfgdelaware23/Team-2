@@ -32,7 +32,7 @@ Our schedule building algorithm works as follows:
 After matching, we convert the data into a CSV format. The structure becomes:
 
 Day | Time | Title | Account | Host | Moderator | Facilitator | Streamer | Broadcaster
----- ------ ------- --------- ------ ----------- ------------- ---------- -------------
+----|------|-------|---------|------|-----------|-------------|----------|-------------
 
 We use the convert_to_csv function to transform the output data from the schedule building algorithm into CSV.
 
