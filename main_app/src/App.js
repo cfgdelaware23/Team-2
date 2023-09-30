@@ -5,7 +5,9 @@ import * as xlsx from 'xlsx';
 
 function App() {
   const [firstFile, setFirstFile] = useState(null);
+  const [firstFileName, setFirstFileName] = useState(null);
   const [secondFile, setSecondFile] = useState(null);
+  const [secondFileName, setSecondFileName] = useState(null);
 
   const handleDrop = (type) => (e) => {
     const reader = new FileReader();
@@ -18,7 +20,7 @@ function App() {
         if (type === "first")
           setFirstFile(json);
         else if (type === "second")
-          setSecondFile(json)
+          setSecondFile(json);
 
         if (firstFile && type === "second")
           apiLayer(firstFile, json);
@@ -26,6 +28,10 @@ function App() {
           apiLayer(json, secondFile);
     };
     reader.readAsArrayBuffer(e.dataTransfer.files[0]);
+    if (type === "first")
+      setFirstFileName(e.dataTransfer.files[0].name);
+    else if (type === "second")
+      setSecondFileName(e.dataTransfer.files[0].name);
   };
 
   //"Label" semantic HTML tag
@@ -35,7 +41,7 @@ function App() {
       <header className="App-header">
         {
           (firstFile && secondFile) ? 
-          <p>Files selected: {firstFile.name} and {secondFile.name}</p> : 
+          <p>Files selected: {firstFileName} and {secondFileName}</p> : 
           <>
             <p>Use the Browse button to select the Excel files from your device</p>
             <label htmlFor="firstFileInput">

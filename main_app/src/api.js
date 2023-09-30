@@ -3,24 +3,38 @@ function apiLayer(volunteerAvailability, eventSchedule) {
     return (
       {
         "name": d.Name,
-        "details": {
-          "skills": d.Roles?.split(", "),
-          "monday": convertTimes(d.Monday),
-          "tuesday": convertTimes(d.Tuesday),
-          "wednesday": convertTimes(d.Wednesday),
-          "thursday": convertTimes(d.Thursday),
-          "friday": convertTimes(d.Friday),
-          "saturday": convertTimes(d.Saturday),
-          "sunday": convertTimes(d.Sunday)
-        }
+        "skills": d.Roles?.split(", "),
+        "monday": convertTimes(d.Monday),
+        "tuesday": convertTimes(d.Tuesday),
+        "wednesday": convertTimes(d.Wednesday),
+        "thursday": convertTimes(d.Thursday),
+        "friday": convertTimes(d.Friday),
+        "saturday": convertTimes(d.Saturday),
+        "sunday": convertTimes(d.Sunday)
       }
     );
   });
-  console.log(eventSchedule);
+  const formattedEventData = eventSchedule.map((e) => {
+    return (
+      {
+        "eventName": e.Event,
+        "day": e.Day,
+        "meetingID": e["Meeting ID"],
+        "organizer": e.Organizer,
+        "account": e.Account,
+        "recurrence": e.Recurring,
+        "time": [parseInt(parseFloat(e.Time) * 24)]
+      }
+    );
+  })
+  const json = {
+    "volunteerData": formattedVolunteerData,
+    "eventData": formattedEventData
+  }
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formattedVolunteerData)
+    body: JSON.stringify(json)
   };
   fetch("/getSchedule", requestOptions).then((res) =>
       res.json().then((d) => {
@@ -41,7 +55,7 @@ function convertTimes(times) {
       const left = time.split("-")[0];
       const right = time.split("-")[1];
       if (!left || !right)
-        return "";
+        return [];
       let leftTime;
       let rightTime;
       if (left.includes("am")) {

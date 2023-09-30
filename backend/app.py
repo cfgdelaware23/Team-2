@@ -6,4 +6,5 @@ app = Flask(__name__)
 def hello_world():
     content = request.json
     print(content)
+    # next step - call Anna's function
     return content
