@@ -82,7 +82,7 @@ function App() {
           </>
         }
           <div className="link-wrapper" role="button" aria-label="Navigate to Generate Email Template">
-            <Link className="button-link" to="EmailTemplate" >Generate Email Template</Link>
+            <Link className="button-link" to="EmailTemplate" target='_blank'>Generate Email Template</Link>
           </div>      
         </header>
     </div>
