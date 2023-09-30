@@ -44,13 +44,17 @@ function App() {
     } else if (e.key === 'e') {
       document.getElementById("secondFileInput").click();
       speak("Event Schedule File dialog opened. Please select the file.");
-    }
+    } else if (e.key === 'Enter' && firstFile && secondFile) {
+      window.location.href = "/EmailTemplate";
+  }
   }
 
   useEffect(() => {
+    if (firstFile && secondFile)
+      speak("Press enter to generate email template");
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
+  }, [firstFile, secondFile]);
 
   function speak(message) {
     const synth = window.speechSynthesis;
