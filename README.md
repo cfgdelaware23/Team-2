@@ -44,3 +44,4 @@ With the data in HTML, we can then automate the sending of notifications via Out
 ## Result ##
 
 We've successfully transformed raw Excel data into an automated event scheduling and notification system. This ensures that the right volunteer is matched to the right event, enhancing efficiency in resource allocation. By automating this whole process, we can save hours of time and energy for the American Council of the Blind and anyone who is blind or low-vision.
+ <br /> <br /> The code ("Code") in this repository was created solely by the student teams during a coding competition hosted by JPMorgan Chase Bank, N.A. ("JPMC"). JPMC did not create or contribute to the development of the Code. This Code is provided AS IS and JPMC makes no warranty of any kind, express or implied, as to the Code, including but not limited to, merchantability, satisfactory quality, non-infringement, title or fitness for a particular purpose or use.
